@@ -53,3 +53,14 @@ body {
 .error-message {
   color: #d32f2f;
 }
+.cpu-healthy {
+  color: green;
+}
+
+.cpu-degraded {
+  color: orange;
+}
+
+.cpu-error {
+  color: red;
+}
