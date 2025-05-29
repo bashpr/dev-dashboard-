@@ -1,8 +1,15 @@
+import http from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
 import axios from 'axios';
 
 const PORT = parseInt(process.env.PORT || '8080', 10);
-const wss = new WebSocketServer({ port: PORT });
+
+const server = http.createServer((_, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('WebSocket server is running.\n');
+});
+
+const wss = new WebSocketServer({ server });
 
 const regions = ['us-east', 'eu-west', 'eu-central', 'us-west', 'sa-east', 'ap-southeast'];
 
@@ -35,7 +42,6 @@ wss.on('connection', (ws: WebSocket) => {
   clients.add(ws);
   console.log('Client connected, total clients:', clients.size);
 
-
   if (cachedData) {
     ws.send(JSON.stringify(cachedData));
   }
@@ -45,7 +51,6 @@ wss.on('connection', (ws: WebSocket) => {
     console.log('Client disconnected, total clients:', clients.size);
   });
 });
-
 
 const pollAndBroadcast = async () => {
   cachedData = await getEndpointData();
@@ -59,3 +64,8 @@ const pollAndBroadcast = async () => {
 
 pollAndBroadcast();
 setInterval(pollAndBroadcast, 30000);
+
+// 👇 Start HTTP + WS server
+server.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
