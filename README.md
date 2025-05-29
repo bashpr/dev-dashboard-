@@ -20,7 +20,9 @@ This project is a real-time DevOps status dashboard that monitors the health of 
 
 ## How to Run Locally
 
-### Backend
+### Backend & Frontend
+
+Backend
 
 ```bash
 cd server
@@ -28,7 +30,7 @@ npm install
 npm run build
 npm start
 
-### Frontend
+Frontend
 
 cd client
 npm install
