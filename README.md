@@ -1,6 +1,5 @@
 # DevOps Status Dashboard
 
-![Dashboard Screenshot](./screenshot.png) *(optional screenshot)*
 
 A real-time monitoring dashboard displaying infrastructure health across multiple regions, built with Node.js (WebSocket server) and React/TypeScript.
 
