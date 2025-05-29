@@ -26,16 +26,34 @@ const getEndpointData = async () => {
   return results;
 };
 
+const clients = new Set<WebSocket>();
+let cachedData: Record<string, any> | null = null;
+
 wss.on('connection', (ws: WebSocket) => {
-  console.log('Client connected');
+  clients.add(ws);
+  console.log('Client connected, total clients:', clients.size);
 
-  const sendData = async () => {
-    const data = await getEndpointData();
-    ws.send(JSON.stringify(data));
-  };
 
-  sendData();
-  const interval = setInterval(sendData, 30000);
+  if (cachedData) {
+    ws.send(JSON.stringify(cachedData));
+  }
 
-  ws.on('close', () => clearInterval(interval));
+  ws.on('close', () => {
+    clients.delete(ws);
+    console.log('Client disconnected, total clients:', clients.size);
+  });
 });
+
+
+const pollAndBroadcast = async () => {
+  cachedData = await getEndpointData();
+
+  for (const client of clients) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify(cachedData));
+    }
+  }
+};
+
+pollAndBroadcast();
+setInterval(pollAndBroadcast, 30000);
