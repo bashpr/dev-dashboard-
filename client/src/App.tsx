@@ -13,7 +13,7 @@ function App() {
   const [status, setStatus] = useState<Status>({});
 
   useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8080');
+    const socket = new WebSocket('wss://your-railway-service-domain.railway.app');
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
       setStatus(data);
