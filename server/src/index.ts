@@ -1,7 +1,9 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import axios from 'axios';
 
-const wss = new WebSocketServer({ port: 8080 });
+const PORT = parseInt(process.env.PORT || '8080', 10);
+const wss = new WebSocketServer({ port: PORT });
+
 const regions = ['us-east', 'eu-west', 'eu-central', 'us-west', 'sa-east', 'ap-southeast'];
 
 const getEndpointData = async () => {
