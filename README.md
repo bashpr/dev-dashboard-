@@ -27,3 +27,10 @@ cd server
 npm install
 npm run build
 npm start
+
+### Frontend
+
+cd client
+npm install
+npm start
+
