@@ -22,9 +22,9 @@ This project is a real-time DevOps status dashboard that monitors the health of 
 
 ### Backend & Frontend
 
+```bash
 Backend
 
-```bash
 cd server
 npm install
 npm run build
