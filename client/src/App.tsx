@@ -13,13 +13,14 @@ function App() {
   const [status, setStatus] = useState<Status>({});
 
   useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8080');
-    socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      setStatus(data);
-    };
-    return () => socket.close();
-  }, []);
+  const socket = new WebSocket('wss://dev-dashboard-production.up.railway.app');
+  socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    setStatus(data);
+  };
+  return () => socket.close();
+}, []);
+
 
   const getCpuLoadStatus = (load: number) => {
     if (load < 0.7) return 'cpu-healthy';    
