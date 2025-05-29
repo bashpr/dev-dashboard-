@@ -54,5 +54,3 @@ npm run preview      # Locally test the production build
 
 ⚙️ Tech Stack
 Frontend: Vite + TypeScript
-
-Linting: ESLint (pre-configured)
