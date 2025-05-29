@@ -1,56 +1,29 @@
 # DevOps Status Dashboard
 
+## Overview
 
-A real-time monitoring dashboard displaying infrastructure health across multiple regions, built with Node.js (WebSocket server) and React/TypeScript.
+This project is a real-time DevOps status dashboard that monitors the health of multiple server regions by polling their status endpoints and broadcasting updates via WebSocket to a React frontend.
 
-## Features
+- **Backend**: Node.js + TypeScript WebSocket server
+- **Frontend**: React + TypeScript dashboard client
+- **Features**:  
+  - Periodic polling of multiple regional endpoints  
+  - Aggregation and error handling  
+  - WebSocket push updates to multiple clients  
+  - Real-time UI with CPU load, DB/Redis status, and other metrics  
+  - Caching to prevent overloading endpoints with multiple connections
 
-- **Real-time updates**: WebSocket connection for live data
-- **Region monitoring**: Track servers across 6 global regions
-- **Key metrics**:
-  - Server count
-  - Active connections
-  - CPU load (with color-coded thresholds)
-- **Status indicators**:
-  - ✅ Healthy (<70% CPU)
-  - ⚠️ Degraded (70-90% CPU)
-  - ❌ Error (>90% CPU or connection issues)
-- **Connection monitoring**: Live/Disconnected status
+## Deployment
 
-## Technologies
+- Frontend URL: https://dev-dashboard-sigma.vercel.app/
+- Backend WebSocket URL: https://dev-dashboard-production.up.railway.app/
 
-- **Backend**:
-  - Node.js with TypeScript
-  - WebSocket server (`ws` library)
-  - Axios for API requests
-- **Frontend**:
-  - React with TypeScript
-  - Functional components with hooks
-  - Responsive CSS grid layout
-## Installation
+## How to Run Locally
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/devops-dashboard.git
-   cd devops-dashboardnt, etc.
+### Backend
 
-🛠️ Getting Started
-1. Clone the Repository
-bash
-git clone https://github.com/your-username/dev-dashboard.git
-cd dev-dashboard/client
-2. Install Dependencies
-bash
+```bash
+cd server
 npm install
-3. Start the Dev Server
-bash
-npm run dev
-App runs at → http://localhost:5173
-
-🏗️ Production Build
-bash
-npm run build        # Outputs to /dist
-npm run preview      # Locally test the production build
-
-⚙️ Tech Stack
-Frontend: Vite + TypeScript
+npm run build
+npm start
